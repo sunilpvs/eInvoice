@@ -1,0 +1,89 @@
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+/* Sidebar styling */
+.sidebar {
+    position: fixed;
+    height: 100%;
+    width: 250px;
+    background-color: #333;
+    padding-top: 20px;
+}
+
+.sidebar h2 {
+    color: white;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    padding: 15px;
+    text-align: center;
+}
+
+.sidebar ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    display: block;
+    padding: 10px;
+    position: relative;
+    transition: color 0.4s ease;
+}
+
+/* Animation for the underline effect */
+.sidebar ul li a::after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 2px;
+    display: block;
+    background: white;
+    transition: width 0.4s ease;
+    bottom: 0;
+    left: 0;
+}
+
+.sidebar ul li a:hover::after {
+    width: 100%; /* Animate underline to grow */
+}
+
+.sidebar ul li a:hover {
+    color: #f1f1f1; /* Optional color change */
+}
+
+
+/* Main content styling */
+.main-content {
+    margin-left: 250px;
+    padding: 20px;
+}
+
+header {
+    background-color: #6e8efb;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+section {
+    margin-top: 20px;
+}
+
+h2 {
+    margin-bottom: 10px;
+}
+
+p {
+    font-size: 16px;
+    color: #444;
+}

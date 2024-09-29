@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Bootstrap demo</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+	<style>
+		.status-name-error,.status-code-error,.status-module-error {
+			color: red;
+			margin-top: 5px;
+			font-size: 0.9em;
+		}
+	</style>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script>
+		$(document).ready(function () {
+			$("#statusName").blur(function () {
+				var enteredname = $("#statusName").val();
+				var statusid = $("#statusid").val();
+				$.ajax({
+					url: "update-status/validatenameandid",
+					data: {id:statusid,statusname: enteredname},
+					success: function (result) {
+						if (result) {
+							$("#statusNameError").text("Status Name Exists!!");
+						} else {
+							$("#statusNameError").text("");
+						}
+					}
+				});
+			}),
+			$("#statusCode").blur(function(){
+				var enteredcode = $("#statusCode").val();
+				var statusid = $("#statusid").val();
+				$.ajax({
+					url : "update-status/validatecodeandid",
+					data : {id:statusid,statuscode : enteredcode},
+					success : function(result){
+						if(result){
+							$("#statusCodeError").text("Status Code Exists!!");
+						}else{
+							$("#statusCodeError").text("");
+						}
+					}
+				});
+			})
+		});
+	</script>
+</head>
+
+<body>
+	<h1></h1>
+
+
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+		crossorigin="anonymous"></script>
+
+	<div class="container" style="width: 50%;">
+
+
+		<h1>Add New Status</h1>
+		<div>
+			<form th:action="@{/status/update}" method="post" th:object="${s1}">
+				<input type="hidden" th:field="*{id}" id="statusid"/>
+				<div class="form-group row">
+					<label for="statusname" class="col-sm-4 col-form-label">Status Name: </label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" id="statusName" th:field="*{statusName}" required>
+						<div id="statusNameError" class="status-name-error" th:text="${statusNameError}"></div>
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="statuscode" class="col-sm-4 col-form-label">Status Code: </label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" id="statusCode" th:field="*{statusCode}">
+						<div id="statusCodeError" class="status-code-error" th:text="${statusCodeError}"></div>
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="statusmodule" class="col-sm-4 col-form-label">Status Module: </label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" id="statusModule" th:field="*{statusModule}">
+						<div id="statusModuleError" class="status-module-error" th:text="${statusModuleError}"></div>
+					</div>
+				</div>
+
+				<button type="submit" id="submitBtn" class="btn btn-primary" >Submit</button>
+				<a href="/status" class="btn btn-primary">Cancel</a>
+			</form>
+		</div>
+	</div>
+
+</body>
+
+</html>
